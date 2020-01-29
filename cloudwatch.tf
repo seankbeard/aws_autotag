@@ -26,15 +26,15 @@ PATTERN
 }
 
 resource "aws_cloudwatch_event_target" "lambda_function" {
-  rule      = "${aws_cloudwatch_event_rule.autotag_event.name}"
+  rule      = aws_cloudwatch_event_rule.autotag_event.name
   target_id = "TriggerFunction"
-  arn       = "${aws_lambda_function.autotag_lambda.arn}"
+  arn       = aws_lambda_function.autotag_lambda.arn
 }
 
 resource "aws_lambda_permission" "allow_cloudwatch_to_trigger" {
     statement_id = "AllowExecutionFromCloudWatch"
     action = "lambda:InvokeFunction"
-    function_name = "${aws_lambda_function.autotag_lambda.function_name}"
+    function_name = aws_lambda_function.autotag_lambda.function_name
     principal = "events.amazonaws.com"
-    source_arn = "${aws_cloudwatch_event_rule.autotag_event.arn}"
+    source_arn = aws_cloudwatch_event_rule.autotag_event.arn
 }

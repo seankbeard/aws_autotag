@@ -53,6 +53,6 @@ EOF
 resource "aws_iam_policy_attachment" "autotag-IAM-policy-attachment" {
   name       = "autotag-IAM-policy-attachment"
   roles      = ["${aws_iam_role.autotag_lambda_role.name}"]
-  policy_arn = "${aws_iam_policy.autotag_policy.arn}"
+  policy_arn = aws_iam_policy.autotag_policy.arn
 }
 
